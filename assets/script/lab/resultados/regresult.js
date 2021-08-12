@@ -23,10 +23,14 @@ $(document).ready(function() {
     $('#tablab a[href="#tablab-list"]').click(function(event){return false;});
     $('#tablab a[href="#tablab-reg"]').click(function(event){return false;});
 
-    $('#txtFDesde,#txtFHasta,#mtxtFRecep').datetimepicker({
+    $('#txtFDesde,#txtFHasta,#mtxtFRecep,#mtxtFanalisis').datetimepicker({
         format: 'DD/MM/YYYY',
         daysOfWeekDisabled: [0],
         locale:'es'
+    });    
+
+    $('#mtxtHanalisis').datetimepicker({
+        format: 'LT'
     });
 
     fechaAnioActual();
@@ -102,6 +106,52 @@ $(document).ready(function() {
             return false;
         }
     });
+    
+    $('#frmsetservicio').validate({
+        rules: {
+        },
+        messages: {
+        },
+        errorElement: 'span',
+        errorPlacement: function (error, element) {
+          error.addClass('invalid-feedback');
+          element.closest('.form-group').append(error);
+        },
+        highlight: function (element, errorClass, validClass) {
+          $(element).addClass('is-invalid');
+        },
+        unhighlight: function (element, errorClass, validClass) {
+          $(element).removeClass('is-invalid');
+        },        
+        submitHandler: function (form) {
+            const botonEvaluar = $('#btngrabarResult');
+            var request = $.ajax({
+                url:$('#frmsetservicio').attr("action"),
+                type:$('#frmsetservicio').attr("method"),
+                data:$('#frmsetservicio').serialize(),
+                error: function(){
+                    Vtitle = 'Error en Guardar!!!';
+                    Vtype = 'error';
+                    sweetalert(Vtitle,Vtype); 
+                },
+                beforeSend: function() {
+                    objPrincipal.botonCargando(botonEvaluar);
+                }
+            });
+            request.done(function( respuesta ) {
+                var posts = JSON.parse(respuesta);
+                if(respuesta == 'true') {   
+                    Vtitle = 'Servicio Guardado!!!';
+                    Vtype = 'success';
+                    sweetalert(Vtitle,Vtype);   
+                    objPrincipal.liberarBoton(botonEvaluar); 
+                    //getListResultados(this.cinternoordenservicio);
+                    //$('#mbtnCIngresult').click();
+                };
+            });
+            return false;
+        }
+    });
 });
 
 fechaActual = function(){
@@ -110,6 +160,7 @@ fechaActual = function(){
 
     $('#txtFDesde').datetimepicker('date', moment(fechatring, 'DD/MM/YYYY') );
     $('#txtFHasta').datetimepicker('date', moment(fechatring, 'DD/MM/YYYY') );
+    $('#mtxtFanalisis').datetimepicker('date', moment(fechatring, 'DD/MM/YYYY') );
 
 };
 
@@ -363,23 +414,57 @@ verResultados = function(id){
             $('#txtidcotizacion').val(this.cinternocotizacion);  
             $('#txtnroversion').val(this.nversioncotizacion);  
             $('#txtidordenservicio').val(this.cinternoordenservicio); 
+            $('#txtobserva').val(this.dobservacionresultados); 
+            $('#mcbotipoinforme').val(this.ctipoinforme).trigger("change"); 
+            $('#txttipoingreso').val(this.conttipoprod); 
+                        
             
             if (this.conttipoprod > 0){                
                 $('#divtblListResultados').show();           
                 $('#divtblListResultadosold').hide();
-                objListaresult.viewList(id)
+                objListaresult.viewList(id,'%')
             }else{           
                 $('#divtblListResultados').hide();           
                 $('#divtblListResultadosold').show();
-                objListaresultold.viewListold(id)
+                objListaresultold.viewListold(id,'%')
             }
-                      
-            
+
+            cbotipoensayo(this.cinternoordenservicio);
+                  
         });
     });
-    //getListResultados(id);
 };
 
+cbotipoensayo = function(vcinternoordenservicio){ 
+    var params = { "cinternoordenservicio": vcinternoordenservicio};   
+    $.ajax({
+        type: 'ajax',
+        method: 'post',
+        url: baseurl+"lab/resultados/cregresult/getcbotipoensayo",
+        dataType: "JSON",
+        async: true,
+        data: params,
+        success:function(result){
+            $('#mcbotipoensayo').html(result);
+        },
+        error: function(){
+            alert('Error, No se puede autenticar por error');
+        }
+    });
+};
+
+$("#mcbotipoensayo").change(function(){
+    var v_idot = $('#txtidordenservicio').val();
+    var v_tipoensayo = $('#mcbotipoensayo').val();
+    var v_conttipoprod = $('#txttipoingreso').val();
+
+    if (v_conttipoprod > 0){
+        objListaresult.viewList(v_idot,v_tipoensayo)
+    }else{           
+        objListaresultold.viewListold(v_idot,v_tipoensayo)
+    }
+    
+});
 
 /* ******** */
 /**

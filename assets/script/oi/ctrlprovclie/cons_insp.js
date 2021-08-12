@@ -63,7 +63,7 @@ $(function () {
 				'info': true,
 				'filter': true,
 				'ajax': {
-					"url": baseurl + 'at/ctrlprovclie/ccons_inspcli/search',
+					"url": baseurl + 'oi/ctrlprovclie/ccons_inspcli/search',
 					"type": "POST",
 					"data": function (d) {
 						d.afecha = ($('#activar_fecha').is(':checked')) ? 1 : 0;
@@ -272,7 +272,7 @@ $(function () {
 	 * @returns {string}
 	 */
 	objInspCli.getLink = function () {
-		return BASE_URL + 'at/ctrlprov/ccons_insp/pdf?codigo=' + objInspCli.pdf.codigo + '&fecha=' + objInspCli.pdf.fecha;
+		return BASE_URL + 'oi/ctrlprov/ccons_insp/pdf?codigo=' + objInspCli.pdf.codigo + '&fecha=' + objInspCli.pdf.fecha;
 	};
 
 	/**
@@ -281,7 +281,7 @@ $(function () {
 	objInspCli.closePDF = function () {
 		const btn = $('#closePDF');
 		$.ajax({
-			url: BASE_URL + 'at/ctrlprov/ccons_insp/close_download',
+			url: BASE_URL + 'oi/ctrlprov/ccons_insp/close_download',
 			method: 'POST',
 			data: objInspCli.pdf,
 			dataType: 'json',
@@ -313,7 +313,7 @@ $(function () {
 	 * @param linkPdf
 	 */
 	objInspCli.download = function (linkPdf) {
-		const url = BASE_URL + 'at/ctrlprov/ccons_insp/download?filename=' + linkPdf;
+		const url = BASE_URL + 'oi/ctrlprov/ccons_insp/download?filename=' + linkPdf;
 		const download = window.open(url, '_blank');
 		if (!download) {
 			objPrincipal.alert('warning', 'Habilite la ventana emergente de su navegador.');
@@ -337,7 +337,7 @@ $(function () {
 		$.ajax({
 			type: 'ajax',
 			method: 'post',
-			url: baseurl + "at/ctrlprov/ccons_insp/get_areas",
+			url: baseurl + "oi/ctrlprov/ccons_insp/get_areas",
 			data: {
 				ccliente: idCliente,
 			},
@@ -363,7 +363,7 @@ $(function () {
 		$.ajax({
 			type: 'ajax',
 			method: 'post',
-			url: baseurl + "at/ctrlprov/cregctrolprov/getcboprovxclie",
+			url: baseurl + "oi/ctrlprov/cregctrolprov/getcboprovxclie",
 			data: {
 				ccliente: idCliente,
 			},
@@ -382,7 +382,7 @@ $(function () {
 		$.ajax({
 			type: 'ajax',
 			method: 'post',
-			url: baseurl + "at/ctrlprov/cregctrolprov/getcboestado",
+			url: baseurl + "oi/ctrlprov/cregctrolprov/getcboestado",
 			data: {},
 			dataType: "JSON",
 		}).done(function(res) {
@@ -400,7 +400,7 @@ $(function () {
 		$.ajax({
 			type: 'ajax',
 			method: 'post',
-			url: baseurl + "at/ctrlprov/cregctrolprov/getcbomaqxprov",
+			url: baseurl + "oi/ctrlprov/cregctrolprov/getcbomaqxprov",
 			data: {
 				cproveedor: idProveedor,
 			},
@@ -438,7 +438,7 @@ $(function () {
 			"responsive"    : false,
 			"select"        : true,
 			'ajax': {
-				"url": baseurl + 'at/ctrlprov/ccons_insp/get_accion_correctiva',
+				"url": baseurl + 'oi/ctrlprov/ccons_insp/get_accion_correctiva',
 				"type": "POST",
 				"data": function (d) {
 					d.codigo = codigo;
@@ -504,7 +504,7 @@ $(function () {
 		const caudi = button.data('codigo');
 		const proveedor = button.data('proveedor');
 		$.ajax({
-			url: baseurl + 'at/ctrlprov/ccons_insp/get_proveedor',
+			url: baseurl + 'oi/ctrlprov/ccons_insp/get_proveedor',
 			method: 'POST',
 			data: {
 				proveedor: proveedor,
@@ -587,7 +587,7 @@ $(function () {
 			filtroPeligro = 'N';
 		}
 		$.ajax({
-			url: baseurl + 'at/ctrlprovclie/ccons_inspcli/exportar_registros',
+			url: baseurl + 'oi/ctrlprovclie/ccons_inspcli/exportar_registros',
 			method: 'POST',
 			data: {
 				afecha: ($('#activar_fecha').is(':checked')) ? 1 : 0,
@@ -611,7 +611,7 @@ $(function () {
 			}
 		}).done(function(res) {
 			objPrincipal.notify('success', 'Descarga del reporte correctamente.');
-			const url = baseurl + 'at/ctrlprov/ccons_insp/download?filename=../../temp/' + res.data;
+			const url = baseurl + 'oi/ctrlprov/ccons_insp/download?filename=../../temp/' + res.data;
 			const download = window.open(url, '_blank');
 			if (!download) {
 				objPrincipal.alert('warning', 'Habilite la ventana emergente de su navegador.');

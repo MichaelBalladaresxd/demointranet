@@ -158,7 +158,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-2"> 
-                                                <label id="lblbuscar" name="lblbuscar">Nro. Cotizacion</label> 
+                                                <label id="lblbuscar" name="lblbuscar">Numero</label> 
                                                 <div>
                                                     <input type="text" id="txtbuscarnro" name="txtbuscarnro" class="form-control"  onkeypress="pulsarListarCoti(event)"/>
                                                 </div>
@@ -272,38 +272,20 @@
                             <div class="tab-pane fade" id="tablab-reg" role="tabpanel" aria-labelledby="tablab-reg-tab">
                                 <fieldset class="scheduler-border-fsc" id="regCoti">
                                     <legend class="scheduler-border-fsc text-primary">DATOS DEL SERVICIO</legend>
+                                    <form class="form-horizontal" id="frmsetservicio" name="frmsetservicio" action="<?= base_url('lab/resultados/cregresult/setservicio')?>" method="POST" enctype="multipart/form-data" role="form">       
                                     <input type="hidden" name="txtidcotizacion" class="form-control" id="txtidcotizacion">
                                     <input type="hidden" name="txtnroversion" class="form-control" id="txtnroversion">
                                     <input type="hidden" name="txtidordenservicio" class="form-control" id="txtidordenservicio">
+                                    <input type="hidden" name="txttipoingreso" class="form-control" id="txttipoingreso">
                                     <div class="form-group">
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
                                             <div class="text-info">Cliente</div>
                                             <div>
                                                 <input type="text" id="txtcliente" name="txtcliente" class="form-control" disabled = true/>
                                             </div>                                            
                                         </div>
-                                        <div class="col-sm-3">
-                                            <div class="text-info">Fecha Analisis</div>
-                                            <div class="input-group date" id="mtxtFanalisis" data-target-input="nearest">
-                                            <input type="text" id="mtxtFanali" name="mtxtFanali" class="form-control datetimepicker-input" data-target="#mtxtFanalisis"/>
-                                            <div class="input-group-append" data-target="#mtxtFanalisis" data-toggle="datetimepicker">
-                                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                            </div>
-                                            </div>
-                                        </div>  
-                                        <div class="col-sm-3">
-                                            <div class="text-info">Hora Analisis</div>
-                                            <div class="input-group date" id="mtxtHanalisis" data-target-input="nearest">
-                                            <input type="text" id="mtxtHanali" name="mtxtHanali" class="form-control datetimepicker-input" data-target="#mtxtHanalisis"/>
-                                            <div class="input-group-append" data-target="#mtxtHanalisis" data-toggle="datetimepicker">
-                                                <div class="input-group-text"><i class="far fa-clock"></i></div>
-                                            </div>
-                                            </div>
-                                        </div>  
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-4">
+                                        <div class="col-md-2">
                                             <div class="text-info">Cotizacion</div>
                                             <div>
                                                 <input type="text" id="txtcotizacion" name="txtcotizacion" class="form-control" disabled = true/>
@@ -315,7 +297,7 @@
                                                 <input type="text" id="txtfcotizacion" name="txtfcotizacion" class="form-control" disabled = true/>
                                             </div> 
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-2">
                                             <div class="text-info">OT</div>
                                             <div>
                                                 <input type="text" id="txtnroot" name="txtnroot" class="form-control" disabled = true/>
@@ -327,6 +309,44 @@
                                                 <input type="text" id="txtfot" name="txtfot" class="form-control" disabled = true/>
                                             </div> 
                                         </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <div class="text-info">Fecha Analisis</div>
+                                            <div class="input-group date" id="mtxtFanalisis" data-target-input="nearest">
+                                            <input type="text" id="mtxtFanali" name="mtxtFanali" class="form-control datetimepicker-input" data-target="#mtxtFanalisis"/>
+                                            <div class="input-group-append" data-target="#mtxtFanalisis" data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                            </div>
+                                            </div>
+                                        </div>  
+                                        <div class="col-md-2">
+                                            <div class="text-info">Hora Analisis</div>
+                                            <div class="input-group date" id="mtxtHanalisis" data-target-input="nearest">
+                                            <input type="text" id="mtxtHanali" name="mtxtHanali" class="form-control datetimepicker-input" data-target="#mtxtHanalisis"/>
+                                            <div class="input-group-append" data-target="#mtxtHanalisis" data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="far fa-clock"></i></div>
+                                            </div>
+                                            </div>
+                                        </div>  
+                                        <div class="col-md-5">
+                                            <div class="text-info">Observación</div>
+                                            <div>
+                                                <input type="text" id="txtobserva" name="txtobserva" class="form-control" />
+                                            </div> 
+                                        </div> 
+                                        <div class="col-md-3">
+                                            <div class="text-info">Tipo informe</div>
+                                            <div>
+                                                <select class="form-control select2bs4" id="mcbotipoinforme" name="mcbotipoinforme">
+                                                <option value="" selected="selected">Elegir...</option>
+                                                <option value="067">Muestra</option>
+                                                <option value="064">Consolidado</option>
+                                                <option value="066">Resultado</option>
+                                                <option value="920">Result. indiv</option>
+                                                </select>
+                                            </div>
+                                        </div> 
                                     </div>
                                     <br>
                                     <div class="row" style="background-color: #dff0d8;">                                                         
@@ -342,18 +362,16 @@
                                                     <a class="dropdown-item" href="#">Vista Previa</a>
                                                     <a class="dropdown-item" href="#">Preliminar</a>
                                                     <div class="dropdown-divider"></div>
-                                                    <a class="dropdown-item" href="#">Muestra</a>
-                                                    <a class="dropdown-item" href="#">Consolidado</a>
-                                                    <a class="dropdown-item" href="#">Resultado</a>
-                                                    <a class="dropdown-item" href="#">Result. Indiv.</a>
+                                                    <a class="dropdown-item" href="#">Cert. Calidad</a>
                                                 </div>
                                                 </button>
                                             </div>
 
-                                            <button type="button" class="btn btn-success" id="btngrabarResult"><i class="fas fa-clipboard-list"></i> Grabar</button>
+                                            <button type="submit" form="frmsetservicio" class="btn btn-success" id="btngrabarResult"><i class="fas fa-clipboard-list"></i> Grabar</button>
                                         </div>    
                                     </div>
                                     </div>
+                                    </form>
                                 </fieldset>
                                 <fieldset class="scheduler-border-fsc" id="regCoti">
                                     <legend class="scheduler-border-fsc text-primary">INGRESO RESULTADOS</legend>
@@ -363,8 +381,20 @@
                                                 <div class="card card-outline card-primary">
                                                     <div class="card-header">
                                                         <h3 class="card-title">Listado de Resultados</h3>
-                                                    </div>                                        
-                                                    <div class="card-body" style="overflow-x: scroll;">                                                        
+                                                    </div> 
+                                                    <div class="card-footer">  
+                                                        <div class="row">                                                        
+                                                            <div class="col-md-3">
+                                                                <div class="text-info">Tipo ensayo</div>
+                                                                <div>
+                                                                    <select class="form-control select2bs4" id="mcbotipoensayo" name="mcbotipoensayo">
+                                                                        <option value="" selected="selected">Elegir...</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div> 
+                                                        </div>
+                                                    </div>                                                                                           
+                                                    <div class="card-body" style="overflow-x: scroll;">
                                                         <div class="row">
                                                             <div class="col-12 table-responsive" id="divtblListResultados"> 
                                                             <table id="tblListResultados" class="table table-striped table-bordered compact" style="width:100%">

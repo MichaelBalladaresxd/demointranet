@@ -664,7 +664,10 @@ seleOT = function(val,nro,fot){
     });    
 
     $('#txtHConstancia').datetimepicker({
-        format: 'LT'
+        format: 'LT',
+        datepicker: false,
+        format: 'H:i',
+        pickDate: false
     })
 
     $('#mhdncinternoordenservicio').val(val);

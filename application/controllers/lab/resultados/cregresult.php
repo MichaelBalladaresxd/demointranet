@@ -56,7 +56,14 @@ class Cregresult extends CI_Controller {
 		$resultado = $this->mregresult->getrecuperaservicio($cinternoordenservicio);
 		echo json_encode($resultado);
 	}
-
+    
+    public function getcbotipoensayo() {	// Visualizar los Tipo Equipos de Registro	
+		
+        $cinternoordenservicio = $this->input->post('cinternoordenservicio');
+		$resultado = $this->mregresult->getcbotipoensayo($cinternoordenservicio);
+		echo json_encode($resultado);
+    }
+    
     public function getlistresultados() { // Buscar Cotizacion
         
         if (!$this->input->is_ajax_request()) {
@@ -850,6 +857,21 @@ class Cregresult extends CI_Controller {
             '@sresultado'    		    =>  $sresultado,
         );
         $retorna = $this->mregresult->setresultadosold($parametros);
+        echo json_encode($retorna);	
+    }
+
+    public function setservicio() { // Registrar informe PT
+        $varnull = '';
+
+        $fanalisis = $this->input->post('mtxtFanali');
+
+        $cinternoordenservicio = $this->input->post('txtidordenservicio');        
+        $fanalisis = ($this->input->post('mtxtFanali') == '%') ? NULL : substr($fanalisis, 6, 4).'-'.substr($fanalisis,3 , 2).'-'.substr($fanalisis, 0, 2);
+        $hanalisis = $this->input->post('mtxtHanali');
+        $dobservacionresultados = $this->input->post('txtobserva');
+        $ctipoinforme = $this->input->post('mcbotipoinforme');
+
+        $retorna = $this->mregresult->setservicio($cinternoordenservicio,$fanalisis,$hanalisis,$dobservacionresultados,$ctipoinforme);
         echo json_encode($retorna);	
     }
 

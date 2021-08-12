@@ -34,9 +34,9 @@ $cia = $this->session->userdata('s_cia');
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-12">
-				<div class="card card-success card-outline card-tabs">
+				<div class="card card-info card-outline card-tabs">
 					<div class="card-header p-0 pt-1 border-bottom-0">
-						<ul class="nav nav-tabs" id="tabptcliente" style="background-color: #28a745;" role="tablist">
+						<ul class="nav nav-tabs" id="tabptcliente" style="background-color: #17a2b8;" role="tablist">
 							<li class="nav-item">
 								<a class="nav-link active" style="color: #000000;" id="tabReg1-tab"
 								   data-toggle="pill" href="#tabReg1" role="tab"
@@ -48,7 +48,7 @@ $cia = $this->session->userdata('s_cia');
 						<div class="tab-content">
 							<div class="tab-pane fade show active" id="tabReg1" role="tabpanel">
 								<!--Contenedor de consulta-->
-								<div class="card card-success">
+								<div class="card card-info">
 									<div class="card-header">
 										<h3 class="card-title">Busqueda</h3>
 
@@ -182,7 +182,7 @@ $cia = $this->session->userdata('s_cia');
 													</div>
 												</div>
 											</div>
-											<?php $this->load->view('at/ctrlprov/vcons_insp_filtro'); ?>
+											<?php $this->load->view('oi/ctrlprov/vcons_insp_filtro'); ?>
 										</form>
 									</div>
 									<!--Contenedor de botones-->
@@ -201,7 +201,7 @@ $cia = $this->session->userdata('s_cia');
 										</div>
 									</div>
 								</div>
-								<div class="card card-success">
+								<div class="card card-info">
 									<div class="card-header with-border">
 										<h3 class="card-title">Listado</h3>
 									</div>
@@ -253,6 +253,6 @@ $cia = $this->session->userdata('s_cia');
 	</div>
 </section>
 
-<?php $this->load->view('at/ctrlprov/vcons_insp_ctiva'); ?>
+<?php $this->load->view('oi/ctrlprov/vcons_insp_ctiva'); ?>
 
-<?php $this->load->view('at/ctrlprov/vcons_insp_prov'); ?>
+<?php $this->load->view('oi/ctrlprov/vcons_insp_prov'); ?>

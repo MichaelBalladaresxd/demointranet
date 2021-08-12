@@ -10,7 +10,7 @@ class ccons_insp extends FS_Controller
 	/**
 	 * CODIGO CIA
 	 */
-	const CIA = '2';
+	const CIA = '1';
 
 	/**
 	 * CODIGO DE AREA
@@ -20,7 +20,7 @@ class ccons_insp extends FS_Controller
 	/**
 	 * CODIGO DE SERVICIO
 	 */
-	const SERVICIO = '01';
+	const SERVICIO = '02';
 
 	/**
 	 * ccons_insp constructor.
@@ -29,7 +29,7 @@ class ccons_insp extends FS_Controller
 	{
 		parent::__construct();
 		$this->load->helper('consinsp');
-		$this->load->model('oi/ctrlprov/mcons_insp', 'mcons_insp');
+		$this->load->model('at/ctrlprov/mcons_insp', 'mcons_insp');
 	}
 
 	/**

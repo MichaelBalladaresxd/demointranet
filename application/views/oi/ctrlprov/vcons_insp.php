@@ -34,9 +34,9 @@ $cia = $this->session->userdata('s_cia');
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-12">
-				<div class="card card-primary card-outline card-tabs">
+				<div class="card card-success card-outline card-tabs">
 					<div class="card-header p-0 pt-1 border-bottom-0">
-						<ul class="nav nav-tabs bg-lightblue" id="tabptcliente" role="tablist">
+						<ul class="nav nav-tabs" id="tabptcliente" style="background-color: #28a745;" role="tablist">
 							<li class="nav-item">
 								<a class="nav-link active" style="color: #000000;" id="tabReg1-tab"
 								   data-toggle="pill" href="#tabReg1" role="tab"
@@ -48,7 +48,7 @@ $cia = $this->session->userdata('s_cia');
 						<div class="tab-content">
 							<div class="tab-pane fade show active" id="tabReg1" role="tabpanel">
 								<!--Contenedor de consulta-->
-								<div class="card card-primary">
+								<div class="card card-success">
 									<div class="card-header">
 										<h3 class="card-title">Busqueda</h3>
 
@@ -206,7 +206,7 @@ $cia = $this->session->userdata('s_cia');
 										</div>
 									</div>
 								</div>
-								<div class="card card-primary">
+								<div class="card card-success">
 									<div class="card-header with-border">
 										<h3 class="card-title">Listado</h3>
 									</div>
@@ -270,7 +270,7 @@ $cia = $this->session->userdata('s_cia');
 	 aria-labelledby="staticBackdropLabel" aria-hidden="true">
 	<div class="modal-dialog modal-xl">
 		<div class="modal-content">
-			<div class="modal-header bg-primary">
+			<div class="modal-header bg-success">
 				<h5 class="modal-title fs w-100 font-weight-bold" id="staticBackdropLabel">INFORME TECNICO</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>

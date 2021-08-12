@@ -20,13 +20,13 @@ class Mregresult extends CI_Model {
 		}		
     }
     public function getrecuperaservicio($cinternoordenservicio) { // Listar Ensayos	
-        $sql = "select c.drazonsocial, a.fanalisis, a.hanalisis, b.dcotizacion, b.fcotizacion, a.nordenservicio, a.fordenservicio,
-            b.cinternocotizacion, b.nversioncotizacion, a.cinternoordenservicio,
-            (select count(1) from presultado z where z.cinternocotizacion = a.cinternocotizacion and z.ctipoproducto not in ('0','2')) as 'conttipoprod'
-        from pordenserviciotrabajo a
-            join pcotizacionlaboratorio b on b.cinternocotizacion = a.cinternocotizacion AND b.nversioncotizacion = a.nversioncotizacion
-            join mcliente c ON c.ccliente = b.ccliente
-        where a.cinternoordenservicio = ".$cinternoordenservicio.";";        
+        $sql = "select c.drazonsocial, convert(varchar,a.fanalisis,103) as 'fanalisis', a.hanalisis, b.dcotizacion, convert(varchar,b.fcotizacion,103) as 'fcotizacion', a.nordenservicio, convert(varchar,a.fordenservicio,103) as 'fordenservicio',
+                    a.dobservacionresultados, a.ctipoinforme, b.cinternocotizacion, b.nversioncotizacion, a.cinternoordenservicio,
+                    (select count(1) from presultado z where z.cinternocotizacion = a.cinternocotizacion and z.ctipoproducto not in ('0','2')) as 'conttipoprod'
+                from pordenserviciotrabajo a
+                    join pcotizacionlaboratorio b on b.cinternocotizacion = a.cinternocotizacion AND b.nversioncotizacion = a.nversioncotizacion
+                    join mcliente c ON c.ccliente = b.ccliente
+                where a.cinternoordenservicio = ".$cinternoordenservicio.";";        
         $query  = $this->db->query($sql);
 
 		if ($query->num_rows() > 0) { 
@@ -34,6 +34,30 @@ class Mregresult extends CI_Model {
 		}{
 			return False;
 		}		
+    }
+    public function getcbotipoensayo($cinternoordenservicio)
+    {
+        $sql = "select distinct C.zctipoensayo, D.dregistro as 'tipoensayo' 
+                from presultado A   
+                    join precepcionmuestra B ON B.cinternocotizacion = A.cinternocotizacion and B.nversioncotizacion = A.nversioncotizacion and B.nordenproducto = A.nordenproducto and B.cmuestra = A.cmuestra
+                    join mensayo C ON A.censayo = C.censayo 
+                    join ttabla D ON D.ctipo = C.zctipoensayo
+                where A.cinternoordenservicio = ".$cinternoordenservicio."
+                order by D.dregistro;";
+		$query  = $this->db->query($sql);
+
+        $listas = '<option value="%" selected="selected">Todos</option>';
+        
+        if ($query->num_rows() > 0) {
+            
+            foreach ($query->result() as $row)
+            {
+                $listas .= '<option value="'.$row->zctipoensayo.'">'.$row->tipoensayo.'</option>';  
+            }
+               return $listas;
+        }{
+            return false;
+        }	
     }
     public function getlistresultadoscab($cinternoordenservicio)
     {
@@ -134,6 +158,16 @@ class Mregresult extends CI_Model {
             $this->db->trans_commit();
             return $query->result(); 
         }   
+    }
+
+    public function setservicio($cinternoordenservicio,$fanalisis,$hanalisis,$dobservacionresultados,$ctipoinforme)
+    {
+        return $this->db->update('pordenserviciotrabajo', [
+            'fanalisis' => $fanalisis,
+            'hanalisis' => $hanalisis,
+            'dobservacionresultados' => trim($dobservacionresultados),
+            'ctipoinforme' => $ctipoinforme,
+        ], ['cinternoordenservicio' => $cinternoordenservicio]);
     }
 }
 ?>
