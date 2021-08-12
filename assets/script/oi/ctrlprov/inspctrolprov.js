@@ -550,14 +550,19 @@ listChecklist = function(varcauditoria,varfservicio){
             {"orderable": false, data: 'nvalorrequisito', targets: 4},
             {"orderable": false, data: 'noconformidad', targets: 5},
             {"orderable": false, data: 'existeHallazgo', targets: 6},
-            {"orderable": false, data: null, targets: 7},
+            {"orderable": false, data: 'dhallazgo', targets: 7},
             {responsivePriority: 1, "orderable": false, 
                 render:function(data, type, row){
-                    return '<div>'+  
-                    '&nbsp; &nbsp;'+
-                    '<a href="#" data-original-title="Registrar" data-toggle="modal" data-target="#modalChecklist" onClick="selChecklist(\''+row.idinspecciontienda+'\',\''+row.iditem+'\',\''+row.cchecklist+'\',\''+row.CREQUISITOCHECKLIST+'\',\''+row.idclaseareatienda+'\',\''+row.CVALORREQUISITO+'\',\''+row.DHALLAZGO+'\',\''+row.NVALORREQUISITO+'\');"><i class="fa fa-edit fa-3x" data-original-title="Registrar" data-toggle="tooltip"></i></a>'+
+                    if(row.dnumeradorpadre==''){
+                         return '<div>'+  
+                        '&nbsp; &nbsp;'+
+                        '<a href="#" data-original-title="Registrar" data-toggle="modal" data-target="#modalChecklist" onClick="selChecklist(\''+row.idinspecciontienda+'\',\''+row.iditem+'\',\''+row.cchecklist+'\',\''+row.CREQUISITOCHECKLIST+'\',\''+row.idclaseareatienda+'\',\''+row.CVALORREQUISITO+'\',\''+row.DHALLAZGO+'\',\''+row.NVALORREQUISITO+'\');"><i class="fa fa-edit fa-3x" data-original-title="Registrar" data-toggle="tooltip"></i></a>'+
+                        
+                    '</div>'  
+                    }else{
+                        return '';
+                    }
                     
-                 '</div>'   
                 }
             }
         ],  
@@ -566,4 +571,11 @@ listChecklist = function(varcauditoria,varfservicio){
 		],
     }); 
 };
+
+selChecklist = function(idinspecciontienda,iditem,idclaseareatienda){
+    console.log('idclaseareatienda', idclaseareatienda)
+    console.log('iditem', iditem)
+    console.log('idinspecciontienda', idinspecciontienda)
+    $("#ModalItemList").modal('show');
+}
 
